@@ -1,0 +1,22 @@
+// FE
+
+
+- kreiraj komponentu 
+- kreiraj servis
+-- mora da okine API POST poziv i da posalje sadrzaj tog fajla, tj kad ga ucitas moras da vidis kako ga ucitava u koji format, i onda da ga spakujes u base64 i prosledis kroz body
+-- response vidi kako da hendlujes, tj kad ti vrati true ti vidi sta bi korisniku vratio
+
+
+
+// BE
+// API deo
+- treba iz tog fajla da izvuces ime fajla 
+- treba iz tog fajla izvuci extenziju
+
+
+// DB deo
+- proveri zasto salje duplo(mozda i gresimo)
+- polje za content ti mora da bude vece od VARCHAR(256) karaktera, treba da cimas na MAX ili nesto slicno kao sto u SQL ima NVARCHAR(MAX)
+- prosledi pravo ime fajla
+- prosledi extenziju(zato sto moze biti .xls, .xlsx)
+- u tabeli treba da promenis strukturu tako da ce sada sadrzati dodatna polja, extension, createdDate(u strukturi tabele da se samo generise)
