@@ -33,4 +33,13 @@ export class TdaService {
     });
 
   }
+  
+  getContentById(uploadExcel: string): Observable<any> {
+    return this.http.get<Tda[]>(`${this.baseUrl}/${contentById}`);
+  }
+
+  getFiles(): Observable<any>{
+    return this.http.get<TdaSingle[]>(`${this.baseUrl}/${files}`);
+  }
+
 }
