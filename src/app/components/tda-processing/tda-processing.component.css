@@ -1,0 +1,41 @@
+.upload-file {
+    border: 1px solid gray;
+    padding: 25px;
+    display: flex;
+    width: 100px;
+}
+
+.components {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.show-file,
+.show-files {
+    margin-top: 100px;
+}
+
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 10px;
+    margin-left: 20px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+th {
+    background-color: #04AA6D;
+    color: white;
+}

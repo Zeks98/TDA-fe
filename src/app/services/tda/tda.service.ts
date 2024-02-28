@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { TdaSingle } from '../../models/tda-single';
+import { TdaFilesComponent } from '../../components/tda-files/tda-files.component';
+import { TdaContentListComponent } from '../../components/tda-content-list/tda-content-list.component';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +11,8 @@ import { Observable } from 'rxjs';
 export class TdaService {
 
   private baseUrl = 'http://localhost:8080';
+  private files = 'files';
+
 
   constructor(private http: HttpClient) { }
 
@@ -19,27 +24,35 @@ export class TdaService {
         const base64String = reader.result?.toString().split(',')[1];
         this.http.post<any>(`${this.baseUrl}/upload`, { excelFile: base64String }).subscribe(
           (response) => {
+            console.log(response);
             observer.next(response);
             observer.complete();
           },
           (error) => {
+            console.log(error);
             observer.error(error);
           }
         );
       };
       reader.onerror = (error) => {
+        console.log(error);
         observer.error(error);
       };
     });
 
   }
-  
-  getContentById(uploadExcel: string): Observable<any> {
-    return this.http.get<Tda[]>(`${this.baseUrl}/${contentById}`);
+
+  getContentById(id: string): Observable<any> {
+    return this.http.get<TdaContentListComponent[]>(`${this.baseUrl}/${this.files}/${id}`);
   }
 
-  getFiles(): Observable<any>{
-    return this.http.get<TdaSingle[]>(`${this.baseUrl}/${files}`);
+  getFiles(): Observable<any> {
+    return this.http.get<TdaSingle[]>(`${this.baseUrl}/${this.files}`).pipe(
+      map((response) => {
+        console.log(response);
+        return response;
+      })
+    );
   }
 
 }

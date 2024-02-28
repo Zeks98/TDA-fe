@@ -7,7 +7,7 @@ import { TdaService } from '../../services/tda/tda.service';
   styleUrl: './tda-content-list.component.css'
 })
 export class TdaContentListComponent implements OnInit {
-  people: Person[] = [];
+  people: any[] = [];
   @Input() selectedFile: string | null = null;
 
 
@@ -16,6 +16,7 @@ export class TdaContentListComponent implements OnInit {
   ngOnInit(): void {
     this.tdaService.getContentById(this.selectedFile!).subscribe(data => {
       this.people = data;
+      console.log(data);
     });
   }
 }

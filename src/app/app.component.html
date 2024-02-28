@@ -1,39 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-  <style>
-       body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color:rgb(243, 200, 106);
-        }
-        .container {
-            max-width: 500px;
-            padding: 20px;
-            background-color: #f54d4d;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(206, 49, 49, 0.1);
-        }
-  </style>
-
-<div>
-  <ul>
-    <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-    <li><a routerLink="/about" routerLinkActive="active">About</a></li>
-    <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
-  </ul>
-</div>
-
 <router-outlet></router-outlet>
-  </head>
-  <body>
-    <div class="container">
-<app-tda-processing (fileUploaded)="handleFileUploaded($event)"></app-tda-processing>
+
+<div class="container">
+  <app-tda-processing (fileUploaded)="handleFileUploaded($event)"></app-tda-processing>
 </div>
-</body>
-</html>

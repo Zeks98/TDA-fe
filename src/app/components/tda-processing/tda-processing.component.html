@@ -1,7 +1,56 @@
 <!DOCTYPE html>
-<input type="file" #fileInput style="display: none" (change)="onFileChange($event)" />
-<button (click)="fileInput.click()">Upload Excel</button>
-<html>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-</html>
+
+<head></head>
+
+<body>
+    <div class="components">
+        <div class="upload-file">
+            <input type="file" #fileInput style="display: none" (change)="onFileChange($event)" />
+            <button (click)="fileInput.click()">Upload Excel</button>
+        </div>
+
+        <div class="show-file" *ngIf="users.length != 0">
+            <table>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Job</th>
+                        <th>Education</th>
+                        <th>JobE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <td>{{ user.firstName }}</td>
+                        <td>{{ user.lastName }}</td>
+                        <td>{{ user.job }}</td>
+                        <td>{{ user.education }}</td>
+                        <td>{{ user.jobE }}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="show-files" *ngIf="files.length !=0">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>File name</th>
+                        <th>View file</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let file of files">
+                        <td>{{ file.id }}</td>
+                        <td>{{ file.fileName }}</td>
+                        <td> <button (click)="this.getFileById(file.id.toString())">View Excel file</button> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</body>
