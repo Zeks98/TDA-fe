@@ -4,12 +4,14 @@ import { Tda } from '../../models/tda';
 import { TdaSingle } from '../../models/tda-single';
 import { FormsModule } from '@angular/forms';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Component({
   selector: 'app-tda-processing',
   templateUrl: './tda-processing.component.html',
   styleUrl: './tda-processing.component.css'
 })
+
 export class TdaProcessingComponent implements OnInit {
   @Output() fileUploaded = new EventEmitter<File>();
 
@@ -26,7 +28,7 @@ export class TdaProcessingComponent implements OnInit {
   ngOnInit(): void {
     this.getFiles();
     this.searchTermChanged.pipe(
-      debounceTime(300), // Adjust debounce time as needed
+      debounceTime(300),
       distinctUntilChanged()
     ).subscribe((searchTerm: string) => {
       this.searchData();
@@ -45,7 +47,7 @@ export class TdaProcessingComponent implements OnInit {
   }
 
   getFileById(id: string) {
-    this.excelUploadService.getContentById(id).subscribe((result) => {
+    this.excelUploadService.getContentById(id, 'firstName').subscribe((result) => {
       this.fileId = Number.parseInt(id);
       this.users = [];
       this.users = result;
@@ -68,7 +70,7 @@ export class TdaProcessingComponent implements OnInit {
   }
 
   searchData(): void {
-    this.excelUploadService.getFilteredContent(this.fileId, this.searchTerm).subscribe(
+    this.excelUploadService.getFilteredContent(this.fileId, this.searchTerm,'firstName').subscribe(
       (data: any[]) => {
         this.users = data;
       },

@@ -14,7 +14,7 @@ export class TdaContentListComponent implements OnInit {
   constructor(private tdaService: TdaService) { }
 
   ngOnInit(): void {
-    this.tdaService.getContentById(this.selectedFile!).subscribe(data => {
+    this.tdaService.getContentById(this.selectedFile!, 'firstName').subscribe(data => {
       this.people = data;
       console.log(data);
     });

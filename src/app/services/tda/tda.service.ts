@@ -5,6 +5,7 @@ import { TdaSingle } from '../../models/tda-single';
 import { TdaFilesComponent } from '../../components/tda-files/tda-files.component';
 import { TdaContentListComponent } from '../../components/tda-content-list/tda-content-list.component';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -43,8 +44,8 @@ export class TdaService {
 
   }
 
-  getContentById(id: string): Observable<any> {
-    return this.http.get<TdaContentListComponent[]>(`${this.baseUrl}/${this.filesUrl}/${id}`);
+  getContentById(id: string, searchBy: string): Observable<any> {
+    return this.http.get<TdaContentListComponent[]>(`${this.baseUrl}/${this.filesUrl}/${id}/${searchBy}`);
   }
 
   getFiles(): Observable<any> {
@@ -56,7 +57,7 @@ export class TdaService {
     );
   }
 
-  getFilteredContent(fileId: number, searchTerm: string): Observable<any> {
-    return this.http.get<TdaContentListComponent[]>(`${this.baseUrl}/${this.filteredContentUrl}/${fileId}/${searchTerm.length < 1 ? '!' : searchTerm}`);
+  getFilteredContent(fileId: number, searchTerm: string, searchBy: string): Observable<any> {
+    return this.http.get<TdaContentListComponent[]>(`${this.baseUrl}/${this.filteredContentUrl}/${fileId}/${searchTerm.length < 1 ? '!' : searchTerm}/${searchBy}`);
   }
 }
