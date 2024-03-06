@@ -9,7 +9,11 @@
             <button (click)="fileInput.click()">Upload Excel</button>
         </div>
 
-        <div class="show-file" *ngIf="users.length != 0">
+        <div class="show-input-field" *ngIf="users != null">
+            <input type="text" [(ngModel)]="searchTerm" placeholder="Enter search term" (ngModelChange)="onSearchTermChange($event)">
+        </div>
+
+        <div class="show-file" *ngIf="users != null">
             <table>
                 <thead>
                     <tr>
@@ -27,7 +31,6 @@
                         <td>{{ user.job }}</td>
                         <td>{{ user.education }}</td>
                         <td>{{ user.jobE }}</td>
-
                     </tr>
                 </tbody>
             </table>

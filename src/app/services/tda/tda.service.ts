@@ -11,7 +11,8 @@ import { TdaContentListComponent } from '../../components/tda-content-list/tda-c
 export class TdaService {
 
   private baseUrl = 'http://localhost:8080';
-  private files = 'files';
+  private filesUrl = 'files';
+  private filteredContentUrl = 'filter'
 
 
   constructor(private http: HttpClient) { }
@@ -43,11 +44,11 @@ export class TdaService {
   }
 
   getContentById(id: string): Observable<any> {
-    return this.http.get<TdaContentListComponent[]>(`${this.baseUrl}/${this.files}/${id}`);
+    return this.http.get<TdaContentListComponent[]>(`${this.baseUrl}/${this.filesUrl}/${id}`);
   }
 
   getFiles(): Observable<any> {
-    return this.http.get<TdaSingle[]>(`${this.baseUrl}/${this.files}`).pipe(
+    return this.http.get<TdaSingle[]>(`${this.baseUrl}/${this.filesUrl}`).pipe(
       map((response) => {
         console.log(response);
         return response;
@@ -55,4 +56,7 @@ export class TdaService {
     );
   }
 
+  getFilteredContent(fileId: number, searchTerm: string): Observable<any> {
+    return this.http.get<TdaContentListComponent[]>(`${this.baseUrl}/${this.filteredContentUrl}/${fileId}/${searchTerm.length < 1 ? '!' : searchTerm}`);
+  }
 }

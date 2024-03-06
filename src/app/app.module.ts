@@ -7,6 +7,7 @@ import { TdaProcessingComponent } from './components/tda-processing/tda-processi
 import { HttpClientModule } from '@angular/common/http';
 import { TdaContentListComponent } from './components/tda-content-list/tda-content-list.component';
 import { TdaFilesComponent } from './components/tda-files/tda-files.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TdaFilesComponent } from './components/tda-files/tda-files.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
