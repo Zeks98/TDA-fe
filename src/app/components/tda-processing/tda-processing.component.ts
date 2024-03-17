@@ -70,7 +70,7 @@ export class TdaProcessingComponent implements OnInit {
   }
 
   searchData(): void {
-    this.excelUploadService.getFilteredContent(this.fileId, this.searchTerm,'firstName').subscribe(
+    this.excelUploadService.getFilteredContent(this.fileId, this.searchTerm, 'firstName').subscribe(
       (data: any[]) => {
         this.users = data;
       },
@@ -78,6 +78,26 @@ export class TdaProcessingComponent implements OnInit {
         console.error('Error fetching data:', error);
       }
     );
+  }
+
+  editRow(id: number, updateUser: Tda) {
+    this.excelUploadService.updateRow(id, updateUser).subscribe(
+      (data: any) => {
+        console.log(`CAO ${data}`);
+        this.users?.map(item => {
+          if (item.id == id) {
+            return { ...item, data };
+          }
+
+          return item;
+        })
+
+        console.log(this.users);
+      },
+      (error: any) => {
+        console.error('Error fetching data:', error);
+      }
+    )
   }
 
 }
