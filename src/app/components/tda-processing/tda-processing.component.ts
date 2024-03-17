@@ -100,4 +100,21 @@ export class TdaProcessingComponent implements OnInit {
     )
   }
 
+
+  deleteRow(id: number) {
+    this.excelUploadService.deleteRow(id).subscribe(
+      (data: any) => {
+        if (data == true) {
+          let itemIndex = this.users?.findIndex(x => x.id == id);
+          this.users?.splice(itemIndex!, 1);
+        }
+        console.log(`CAO ${data}`);
+
+      },
+      (error: any) => {
+        console.error('Error fetching data:', error);
+      }
+    )
+  }
+
 }

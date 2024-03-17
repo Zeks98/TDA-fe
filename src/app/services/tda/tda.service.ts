@@ -65,4 +65,8 @@ export class TdaService {
   updateRow(id: number, user: Tda): Observable<any> {
     return this.http.put<Tda>(`${this.baseUrl}/${id}`, user);
   }
+
+  deleteRow(id: number) : Observable<any>{
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
 }
