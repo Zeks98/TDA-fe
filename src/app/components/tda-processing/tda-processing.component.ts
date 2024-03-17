@@ -5,6 +5,7 @@ import { TdaSingle } from '../../models/tda-single';
 import { FormsModule } from '@angular/forms';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { Pipe, PipeTransform } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-tda-processing',
@@ -80,19 +81,49 @@ export class TdaProcessingComponent implements OnInit {
     );
   }
 
-  editRow(id: number, updateUser: Tda) {
-    this.excelUploadService.updateRow(id, updateUser).subscribe(
+  editRow(updateUser: Tda): void {
+    updateUser.isEdit = true;
+    this.excelUploadService.updateRow(updateUser.id, updateUser).subscribe(
       (data: any) => {
-        console.log(`CAO ${data}`);
         this.users?.map(item => {
-          if (item.id == id) {
+          if (item.id == updateUser.id) {
             return { ...item, data };
           }
 
           return item;
         })
 
-        console.log(this.users);
+      },
+      (error: any) => {
+        console.error('Error fetching data:', error);
+      }
+    )
+  }
+
+  saveRow(user: Tda): void {
+    // Call backend to save changes
+    user.isEdit = false;
+
+  }
+
+  toggleEditMode(user: Tda): void {
+    user.isEdit = !user.isEdit; // Toggle edit mode
+  }
+
+  saveChanges(user: Tda): void {
+    // Send updated data to API (e.g., PUT request)
+    // Handle success/failure accordingly
+    user.isEdit = true;
+    this.excelUploadService.updateRow(user.id, user).subscribe(
+      (data: Tda) => {
+        this.users?.map(item => {
+          if (item.id == user.id) {
+            this.toggleEditMode(user);
+            return { ...item, data };
+          }
+
+          return item;
+        })
       },
       (error: any) => {
         console.error('Error fetching data:', error);
@@ -108,7 +139,6 @@ export class TdaProcessingComponent implements OnInit {
           let itemIndex = this.users?.findIndex(x => x.id == id);
           this.users?.splice(itemIndex!, 1);
         }
-        console.log(`CAO ${data}`);
 
       },
       (error: any) => {

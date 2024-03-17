@@ -20,6 +20,5 @@ export class TdaFilesComponent {
   onFileClick(fileName: string): void {
     // Logic to handle file click
     // You can navigate to another component or perform any action you want
-    console.log('File clicked:', fileName);
   }
 }

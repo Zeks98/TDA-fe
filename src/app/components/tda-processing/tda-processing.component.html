@@ -10,11 +10,14 @@
         </div>
 
         <div class="show-input-field" *ngIf="users != null">
-            <input type="text" [(ngModel)]="searchTerm" placeholder="Enter search term" (ngModelChange)="onSearchTermChange($event)">
+            <input type="text" [(ngModel)]="searchTerm" placeholder="Enter search term"
+                (ngModelChange)="onSearchTermChange($event)">
         </div>
 
         <div class="show-file" *ngIf="users != null">
-            <table>
+
+
+            <!--<table>
                 <thead>
                     <tr>
                         <th>First Name</th>
@@ -36,7 +39,46 @@
                         <td><a href="#" (click)="deleteRow(user.id)">Delete</a></td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
+
+            <thead>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Job</th>
+                  <th>Education</th>
+                  <th>JobE</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let user of users">
+                  <tr>
+                    <ng-container *ngIf="!user.isEdit; else editRow">
+                      <td>{{ user.firstName }}</td>
+                      <td>{{ user.lastName }}</td>
+                      <td>{{ user.job }}</td>
+                      <td>{{ user.education }}</td>
+                      <td>{{ user.jobE }}</td>
+                      <td><button (click)="toggleEditMode(user)">Edit</button></td>
+                      <td><a href="#" (click)="deleteRow(user.id)">Delete</a></td>
+                    </ng-container>
+                    <ng-template #editRow>
+                      <td><input type="text" [(ngModel)]="user.firstName" /></td>
+                      <td><input type="text" [(ngModel)]="user.lastName" /></td>
+                      <td><input type="text" [(ngModel)]="user.job" /></td>
+                      <td><input type="text" [(ngModel)]="user.education" /></td>
+                      <td><input type="text" [(ngModel)]="user.jobE" /></td>
+                      <td>
+                        <button (click)="saveChanges(user)">Save</button>
+                        <!--<button (click)="cancelEdit(user)">Cancel</button> -->
+                      </td>
+                    </ng-template>
+                  </tr>
+                </ng-container>
+              </tbody>
+
         </div>
 
         <div class="show-files" *ngIf="files.length !=0">

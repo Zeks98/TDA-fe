@@ -27,18 +27,15 @@ export class TdaService {
         const base64String = reader.result?.toString().split(',')[1];
         this.http.post<any>(`${this.baseUrl}/upload`, { excelFile: base64String }).subscribe(
           (response) => {
-            console.log(response);
             observer.next(response);
             observer.complete();
           },
           (error) => {
-            console.log(error);
             observer.error(error);
           }
         );
       };
       reader.onerror = (error) => {
-        console.log(error);
         observer.error(error);
       };
     });
@@ -52,7 +49,6 @@ export class TdaService {
   getFiles(): Observable<any> {
     return this.http.get<TdaSingle[]>(`${this.baseUrl}/${this.filesUrl}`).pipe(
       map((response) => {
-        console.log(response);
         return response;
       })
     );
@@ -62,7 +58,7 @@ export class TdaService {
     return this.http.get<Tda[]>(`${this.baseUrl}/${this.filteredContentUrl}/${fileId}/${searchTerm.length < 1 ? '!' : searchTerm}/${searchBy}`);
   }
 
-  updateRow(id: number, user: Tda): Observable<any> {
+  updateRow(id: number, user: Tda): Observable<Tda> {
     return this.http.put<Tda>(`${this.baseUrl}/${id}`, user);
   }
 
