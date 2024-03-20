@@ -60,7 +60,6 @@ export class TdaProcessingComponent implements OnInit {
     if (fileList.length > 0) {
       const file: File = fileList[0];
       this.excelUploadService.uploadExcel(file).subscribe((result) => {
-        // this.fileUploaded.emit(result);
         this.users = result;
       });
     }
@@ -101,18 +100,15 @@ export class TdaProcessingComponent implements OnInit {
   }
 
   saveRow(user: Tda): void {
-    // Call backend to save changes
     user.isEdit = false;
 
   }
 
   toggleEditMode(user: Tda): void {
-    user.isEdit = !user.isEdit; // Toggle edit mode
+    user.isEdit = !user.isEdit; 
   }
 
   saveChanges(user: Tda): void {
-    // Send updated data to API (e.g., PUT request)
-    // Handle success/failure accordingly
     user.isEdit = true;
     this.excelUploadService.updateRow(user.id, user).subscribe(
       (data: Tda) => {

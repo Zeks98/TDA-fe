@@ -7,7 +7,7 @@ import { TdaService } from '../../services/tda/tda.service';
   styleUrl: './tda-files.component.css'
 })
 export class TdaFilesComponent {
-  files: string[] = []; // Assuming you're receiving file names
+  files: string[] = []; 
 
   constructor(private tdaService: TdaService) { }
 
@@ -18,7 +18,5 @@ export class TdaFilesComponent {
   }
 
   onFileClick(fileName: string): void {
-    // Logic to handle file click
-    // You can navigate to another component or perform any action you want
   }
 }

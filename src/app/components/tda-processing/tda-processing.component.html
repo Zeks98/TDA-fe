@@ -16,31 +16,6 @@
 
         <div class="show-file" *ngIf="users != null">
 
-
-            <!--<table>
-                <thead>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Job</th>
-                        <th>Education</th>
-                        <th>JobE</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let user of users">
-                        <td>{{ user.firstName }}</td>
-                        <td>{{ user.lastName }}</td>
-                        <td>{{ user.job }}</td>
-                        <td>{{ user.education }}</td>
-                        <td>{{ user.jobE }}</td>
-                        <td><a href="#" (click)="editRow(user.id, user)">Edit</a></td>
-                        <td><a href="#" (click)="deleteRow(user.id)">Delete</a></td>
-                    </tr>
-                </tbody>
-            </table> -->
-
             <thead>
                 <tr>
                   <th>First Name</th>
@@ -72,7 +47,6 @@
                       <td><input type="text" [(ngModel)]="user.jobE" /></td>
                       <td>
                         <button (click)="saveChanges(user)">Save</button>
-                        <!--<button (click)="cancelEdit(user)">Cancel</button> -->
                       </td>
                     </ng-template>
                   </tr>
