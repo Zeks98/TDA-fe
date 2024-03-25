@@ -23,6 +23,9 @@ export class TdaProcessingComponent implements OnInit {
   fileId: number = 0;
   searchTerm: string = "";
   searchTermChanged: Subject<string> = new Subject<string>();
+  currentPage = 0;
+  pageSize = 10;
+  currentDocumentId: string | undefined;
 
   constructor(private excelUploadService: TdaService) { }
 
@@ -48,7 +51,8 @@ export class TdaProcessingComponent implements OnInit {
   }
 
   getFileById(id: string) {
-    this.excelUploadService.getContentById(id, 'firstName').subscribe((result) => {
+    this.currentDocumentId = id;
+    this.excelUploadService.getContentById(id, 'firstName', this.currentPage, this.pageSize).subscribe((result) => {
       this.fileId = Number.parseInt(id);
       this.users = [];
       this.users = result;
@@ -142,5 +146,16 @@ export class TdaProcessingComponent implements OnInit {
       }
     )
   }
+  nextPage(): void {
+    this.currentPage++;
+    this.getFileById(this.currentDocumentId!);
+  }
 
+  previousPage(): void {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+      this.getFileById(this.currentDocumentId!);
+    }
+
+}
 }

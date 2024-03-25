@@ -16,7 +16,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     AppComponent,
     TdaProcessingComponent,
     TdaContentListComponent,
-    TdaFilesComponent
+    TdaFilesComponent,
   ],
   imports: [
     BrowserModule,

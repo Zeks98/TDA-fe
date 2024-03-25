@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { TdaSingle } from '../../models/tda-single';
 import { TdaFilesComponent } from '../../components/tda-files/tda-files.component';
@@ -42,8 +42,8 @@ export class TdaService {
 
   }
 
-  getContentById(id: string, searchBy: string): Observable<any> {
-    return this.http.get<TdaContentListComponent[]>(`${this.baseUrl}/${this.filesUrl}/${id}/${searchBy}`);
+  getContentById(id: string, searchBy: string, page: number, pageSize: number): Observable<any> {
+    return this.http.get<TdaContentListComponent[]>(`${this.baseUrl}/${this.filesUrl}/${id}/${searchBy}?page=${page}&pageSize=${pageSize}`);
   }
 
   getFiles(): Observable<any> {
@@ -64,5 +64,12 @@ export class TdaService {
 
   deleteRow(id: number) : Observable<any>{
     return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+  
+  getData(page: number, pageSize: number): Observable<any> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('pageSize', pageSize.toString());
+      return this.http.get<TdaSingle[]>(`${this.baseUrl}/${this.filesUrl}`);
   }
 }
