@@ -5,6 +5,7 @@ import { TdaSingle } from '../../models/tda-single';
 import { TdaFilesComponent } from '../../components/tda-files/tda-files.component';
 import { TdaContentListComponent } from '../../components/tda-content-list/tda-content-list.component';
 import { Tda } from '../../models/tda';
+import { PaginatedResult } from '../../models/paginated-result';
 
 
 @Injectable({
@@ -62,14 +63,14 @@ export class TdaService {
     return this.http.put<Tda>(`${this.baseUrl}/${id}`, user);
   }
 
-  deleteRow(id: number) : Observable<any>{
+  deleteRow(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
-  
+
   getData(page: number, pageSize: number): Observable<any> {
     const params = new HttpParams()
       .set('page', page.toString())
       .set('pageSize', pageSize.toString());
-      return this.http.get<TdaSingle[]>(`${this.baseUrl}/${this.filesUrl}`);
+    return this.http.get<TdaSingle[]>(`${this.baseUrl}/${this.filesUrl}`);
   }
 }

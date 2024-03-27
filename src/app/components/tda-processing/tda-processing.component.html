@@ -52,27 +52,34 @@
           </tr>
         </ng-container>
       </tbody>
-      <button (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
-      <button (click)="nextPage()" [disabled]="currentPage === 10 - 1">Next</button>
+      <div class="pagination-board">
+        <a (click)="previousPage()" [class.disabled]="this.currentPage === 1">Previous</a>
+        <div class="pages">
+          <a href="#" (click)="setCurrentPage(number)" *ngFor="let number of this.pages" style="padding: 10px;">
+            {{number}}
+          </a>
+        </div>
+        <a (click)="nextPage()" [class.disabled]="this.currentPage === this.pages.length">Next</a>
+      </div>
     </div>
 
-    <div class="show-files" *ngIf="files.length !=0">
-      <table>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>File name</th>
-            <th>View file</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let file of files">
-            <td>{{ file.id }}</td>
-            <td>{{ file.fileName }}</td>
-            <td> <button (click)="this.getFileById(file.id.toString())">View Excel file</button> </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class=" show-files" *ngIf="files.length !=0">
+          <table>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>File name</th>
+                <th>View file</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let file of files">
+                <td>{{ file.id }}</td>
+                <td>{{ file.fileName }}</td>
+                <td> <button (click)="this.getFileById(file.id.toString())">View Excel file</button> </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
     </div>
-  </div>
 </body>

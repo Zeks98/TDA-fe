@@ -39,3 +39,28 @@ th {
     background-color: #04AA6D;
     color: white;
 }
+
+.pages {
+    display: flex;
+    flex-direction: row;
+}
+
+.pagination-board {
+    border-top: 1px solid gray;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.pagination-board>a {
+    padding: 10px;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.enabled {
+    cursor: pointer;
+}
